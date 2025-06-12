@@ -2,16 +2,18 @@
 - add lex.1 file.
 - add yacc.y file.
 
-- bison -d yacc.y      # Generates y.tab.c and y.tab.h
+<!-- - bison -d yacc.y      # Generates y.tab.c and y.tab.h -->
+- bison -d -o y.tab.c yacc.y        # Produces y.tab.c and y.tab.h
+
 - flex lex.l           # Generates lex.yy.c
 
-- bison -d -o y.tab.c yacc.y        # Generate calc file.
-
-- gcc -o calc lex.yy.c y.tab.c -ll -lm      # build
+- gcc -o calc lex.yy.c y.tab.c -ll -lm     # Step 3: Compile both into an executable
 
 ### To edit calc file
   - type ./calc hit enter
   - put code.
+          p = 15;
+          q = 3;
           while (p > q) {
               if (p < q)
                   p = p - q;
@@ -19,9 +21,27 @@
                   q = p + q;
           }
           print q;
+
+        //valid
+        x = 10;
+        if (x < 20) {
+          print x;
+        };
+
+        // invalid
+        x = 10;
+        if (x < 20) {
+          print 'larger';
+        };
+
   
   - hit double enter
 
 
+- to question 1,
+  - upload lex.l file and yacc.y file
+  - output result from calc
 
+
+  
 

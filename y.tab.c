@@ -1557,14 +1557,25 @@ yyreturnlab:
 
 
 nodeType *con(int value) {
-    nodeType *p = malloc(sizeof(nodeType));
+    nodeType *p;
+
+    /* allocate node */
+    if ((p = malloc(sizeof(nodeType))) == NULL)
+        yyerror("out of memory");
+    
     p->type = typeCon;
     p->con.value = value;
     return p;
 }
 
 nodeType *id(int i) {
-    nodeType *p = malloc(sizeof(nodeType));
+    nodeType *p;
+
+    /* allocate node */
+    if ((p = malloc(sizeof(nodeType))) == NULL)
+        yyerror("out of memory");
+
+    /* copy information */
     p->type = typeId;
     p->id.i = i;
     return p;
@@ -1572,13 +1583,20 @@ nodeType *id(int i) {
 
 nodeType *opr(int oper, int nops, ...) {
     va_list ap;
-    nodeType *p = malloc(sizeof(nodeType) + (nops - 1) * sizeof(nodeType *));
+    nodeType *p;
+    int i;
+
+    /* allocate node, extending op array */
+    if ((p = malloc(sizeof(nodeType) + (nops - 1) * sizeof(nodeType *))) == NULL)
+        yyerror("out of memory");
+
+    /* copy information */
     p->type = typeOpr;
     p->opr.oper = oper;
     p->opr.nops = nops;
     va_start(ap, nops);
-    for (int i = 0; i < nops; i++)
-        p->opr.op[i] = va_arg(ap, nodeType *);
+    for (i = 0; i < nops; i++)
+        p->opr.op[i] = va_arg(ap, nodeType*);
     va_end(ap);
     return p;
 }
