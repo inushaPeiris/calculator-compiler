@@ -34,13 +34,8 @@
           print 'larger';
         };
 
-  
+
   - hit double enter
-
-
-- to question 1,
-  - upload lex.l file and yacc.y file
-  - output result from calc
 
 
   
